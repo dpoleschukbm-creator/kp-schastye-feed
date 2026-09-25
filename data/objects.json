@@ -20,7 +20,8 @@
    "descReplace": [["Также отказываем помощь", "Также оказываем помощь"]]},
   {"avitoId": "8094271259", "category": "house", "title": "Дом 354 м² на участке 10 сот.", "price": 44000000,
    "houseArea": 354, "landSotka": 10, "rooms": 4, "floors": 2, "buildYear": 2026, "walls": "gluedLaminatedTimber",
-   "water": "borehole", "terrace": true, "bathhouse": true},
+   "water": "borehole", "terrace": true, "bathhouse": true,
+   "descReplace": [["с участком от 20 соток", "с участком 10 соток"]]},
   {"avitoId": "8157960032", "category": "land", "title": "Участок 6 сот. (ИЖС)", "price": 1200000,
    "landSotka": 6,
    "descReplace": [
