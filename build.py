@@ -157,6 +157,10 @@ def main() -> None:
     parts = ['<?xml version="1.0" encoding="UTF-8"?>', "<feed>", "  <feed_version>2</feed_version>"]
     for o in objects:
         desc = clean_description(media[o["avitoId"]]["desc"])
+        for old, new in o.get("descReplace", []):
+            if old not in desc:
+                raise RuntimeError(f"{o['avitoId']}: в описании нет фрагмента «{old}»")
+            desc = desc.replace(old, new)
         if not 15 <= len(desc) <= 7000:
             raise RuntimeError(f"{o['avitoId']}: длина описания {len(desc)} вне 15–7000")
         parts.append(build_object(o, desc))
