@@ -255,7 +255,7 @@
     <HasGas>true</HasGas>
     <HasDrainage>true</HasDrainage>
     <WcLocationType>indoors</WcLocationType>
-    <RepairType>no</RepairType>
+    <RepairType>cosmetic</RepairType>
     <Photos>
       <PhotoSchema>
         <FullUrl>https://dpoleschukbm-creator.github.io/kp-schastye-feed/photos/8094003452/01-plan100.jpg</FullUrl>
@@ -406,8 +406,7 @@
       <MaterialTypes>
         <MaterialType>solidWood</MaterialType>
       </MaterialTypes>
-      <HasTerrace>true</HasTerrace>
-      <Condition>interiorDecorationRequired</Condition>
+      <Condition>ready</Condition>
     </House>
     <BargainTerms>
       <Price>8500000</Price>

@@ -114,7 +114,7 @@ def build_object(o: dict, desc: str) -> str:
     x += [tag("HasElectricity", "true"), tag("HasWater", "true"),
           tag("HasGas", "true"), tag("HasDrainage", "true")]
     if is_house:
-        x += [tag("WcLocationType", "indoors"), tag("RepairType", "no")]
+        x += [tag("WcLocationType", "indoors"), tag("RepairType", o.get("repair", "no"))]
         if o.get("bathhouse"):
             x.append(tag("HasBathhouse", "true"))
 
@@ -142,7 +142,7 @@ def build_object(o: dict, desc: str) -> str:
               "      </MaterialTypes>"]
         if o.get("terrace"):
             x.append(tag("HasTerrace", "true", 6))
-        x += [tag("Condition", "interiorDecorationRequired", 6), "    </House>"]
+        x += [tag("Condition", o.get("condition", "interiorDecorationRequired"), 6), "    </House>"]
     x += ["    <BargainTerms>", tag("Price", o["price"], 6), tag("Currency", "rur", 6),
           tag("MortgageAllowed", "true", 6), "    </BargainTerms>",
           "  </object>"]
