@@ -57,11 +57,13 @@ def clean_description(text: str) -> str:
 
 
 # --- фото --------------------------------------------------------------------
-def download_photos(avito_id: str, urls: list[str]) -> None:
+def download_photos(avito_id: str, urls: list[str], removed: list[str]) -> None:
     folder = DOCS / "photos" / avito_id
     folder.mkdir(parents=True, exist_ok=True)
     for i, url in enumerate(urls[:MAX_PHOTOS], 1):
         dest = folder / f"{i:02d}.jpg"
+        if dest.name in removed:  # фото заменено своим, с Авито не докачивать
+            continue
         if dest.exists() and dest.stat().st_size > 0:
             continue
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -76,10 +78,12 @@ def download_photos(avito_id: str, urls: list[str]) -> None:
                 time.sleep(2)
 
 
-def photo_urls(avito_id: str) -> list[str]:
+def photo_urls(avito_id: str, removed: list[str]) -> list[str]:
     folder = DOCS / "photos" / avito_id
     seen, urls = set(), []
     for p in sorted(folder.glob("*.jpg")):
+        if p.name in removed:
+            continue
         digest = hashlib.md5(p.read_bytes()).hexdigest()
         if digest in seen:  # Циан запрещает дубли фото в объявлении
             continue
@@ -114,7 +118,7 @@ def build_object(o: dict, desc: str) -> str:
         if o.get("bathhouse"):
             x.append(tag("HasBathhouse", "true"))
 
-    photos = photo_urls(o["avitoId"])
+    photos = photo_urls(o["avitoId"], o.get("removedPhotos", []))
     if not photos:
         raise RuntimeError(f"{o['avitoId']}: нет фото, запустите с --photos")
     x.append("    <Photos>")
@@ -151,7 +155,7 @@ def main() -> None:
 
     if "--photos" in sys.argv:
         for o in objects:
-            download_photos(o["avitoId"], media[o["avitoId"]]["imgs"])
+            download_photos(o["avitoId"], media[o["avitoId"]]["imgs"], o.get("removedPhotos", []))
             print(f"фото {o['avitoId']}: ok")
 
     parts = ['<?xml version="1.0" encoding="UTF-8"?>', "<feed>", "  <feed_version>2</feed_version>"]
