@@ -3,7 +3,7 @@
    "houseArea": 170, "landSotka": 10, "rooms": 4, "floors": 1, "buildYear": 2026, "walls": "brick",
    "water": "well", "terrace": false, "bathhouse": false,
    "descReplace": [["\nВ наличии 4 дома.", ""]]},
-  {"avitoId": "8094003452", "category": "house", "title": "Дом 100 м², участок 13 сот.", "price": 8500000,
+  {"avitoId": "8094003452", "category": "house", "title": "Дом 100 м², участок 13 сот.", "price": 9400000,
    "houseArea": 100, "landSotka": 13, "rooms": 3, "floors": 1, "buildYear": 2025, "walls": "solidWood",
    "water": "well", "terrace": false, "bathhouse": false,
    "repair": "cosmetic", "condition": "ready",
